@@ -1,0 +1,6 @@
+<mat-toolbar [color]="'primary'">
+  <span [ngStyle]="headStyle" [style.color]="mainColor">{{
+    name || "senza nome"
+  }}</span>
+  <button mat-button (click)="onChangeColor($event)">Change color</button>
+</mat-toolbar>
