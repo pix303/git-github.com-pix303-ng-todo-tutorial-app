@@ -9,6 +9,7 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo-detail.component.scss'],
 })
 export class TodoDetailComponent implements OnInit {
+  // @Input() -- gestione con componenti istanziati nello stesso comp parent
   currentTodo?: TodoModel = {
     title: 'vuoto',
     id: 0,

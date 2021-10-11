@@ -10,9 +10,14 @@ import { TodoModule } from './modules/todo/todo.module';
 export class AppComponent {
   title = 'todo-app';
 
-  currentTodo: TodoModel = { id: 1, title: 'test', completed: false };
+  // ------------------------------------
+  // gestione con compomenti Todo istanziati in template app component
+  // ------------------------------------
+  //
+  // currentTodo: TodoModel = { id: 1, title: 'test', completed: false };
 
-  onTodoSelected(item: TodoModel): void {
-    this.currentTodo = item;
-  }
+  // onTodoSelected(item: TodoModel): void {
+  //   this.currentTodo = item;
+  // }
+  // --------------------------------
 }
