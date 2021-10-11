@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TodoModel } from '../todo-model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Todo } from '../todo-model';
 import { TodoService } from '../todo.service';
 
 @Component({
@@ -12,12 +14,38 @@ export class TodoListComponent implements OnInit {
   // @Output() todoSelected: EventEmitter<TodoModel> =
   //   new EventEmitter<TodoModel>();
 
-  constructor(public srv: TodoService) {}
+  // proprietà valorizzata dal subscribe di obs del service
+  todos: Todo[] = [];
+  // proprietà usata direttamente in template html con pipe async
+  todos$: Observable<Todo[]> = new Observable();
 
-  ngOnInit(): void {}
+  constructor(
+    public srv: TodoService,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // valorizzo todos con risultato del subscribe
+    this.srv.getTodos().subscribe((res) => (this.todos = res));
+    // valorizzo observable che uso poi in template
+    this.todos$ = this.srv.getTodos();
+
+    // metodo alternativo con trigger richiesta lato server
+    // e consumo variabile srv.todos direttamente in template html
+    this.srv.retriveTodos();
+  }
 
   onItemSelected(id: number): void {
+    // ------------------------------------
+    // gestione output con event emitter
+    // ------------------------------------
     // const candidateItem = this.srv.todos.find((item) => item.id === id);
     // this.todoSelected.next(candidateItem);
+
+    // navigazione alternativa a [routerLink]
+    this.router.navigate(['../', 'detail', id], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }

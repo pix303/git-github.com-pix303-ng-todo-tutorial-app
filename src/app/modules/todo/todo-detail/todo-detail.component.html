@@ -1,3 +1,12 @@
+<h2>
+  Utilizzo con variabile del componente valorizzata in modo asincrono da
+  subscribe
+</h2>
 <p>id: {{ currentTodo?.id }}</p>
 <p>title: {{ currentTodo?.title }}</p>
 <p>completed: {{ currentTodo?.completed }}</p>
+
+<h2>Utilizzo diretto dell'observable esposto da servizio</h2>
+<p>id: {{ (srv.currentTodo$ | async)?.id }}</p>
+<p>title: {{ (srv.currentTodo$ | async)?.title }}</p>
+<p>completed: {{ (srv.currentTodo$ | async)?.completed }}</p>

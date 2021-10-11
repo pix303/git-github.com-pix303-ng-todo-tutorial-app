@@ -1,13 +1,23 @@
-<h2>Lista delle cose da fare</h2>
+<h2>utilizzo con variabile interna</h2>
 <mat-nav-list>
   <a
     mat-list-item
-    *ngFor="let todo of srv.todos; let i = index"
+    *ngFor="let todo of todos; let i = index"
     (click)="onItemSelected(todo.id)"
-    [routerLink]="['../', 'detail', todo.id]"
   >
     <h3>{{ i + 1 }} - {{ todo.title }}</h3>
     <mat-icon matListIcon *ngIf="todo.completed">done</mat-icon>
     <mat-icon matListIcon>{{ todo.completed ? "done" : "home" }}</mat-icon>
   </a>
 </mat-nav-list>
+<!-- in caso di gestione link direttamente in tag anchor [routerLink]="['../', 'detail', todo.id]" -->
+
+<h2>utilizzo con observable</h2>
+<ol>
+  <li *ngFor="let item of todos$ | async">{{ item.title }}</li>
+</ol>
+
+<h2>Utilizzo proprietà esposta dal servizio</h2>
+<ul>
+  <li *ngFor="let item of srv.todos">{{ item.title }}</li>
+</ul>

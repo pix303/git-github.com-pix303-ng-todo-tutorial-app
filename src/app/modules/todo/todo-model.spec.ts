@@ -1,7 +1,7 @@
-import { TodoModel } from './todo-model';
+import { Todo } from './todo-model';
 
 describe('TodoModel', () => {
   it('should create an instance', () => {
-    expect(new TodoModel()).toBeTruthy();
+    expect(new Todo()).toBeTruthy();
   });
 });

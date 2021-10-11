@@ -8,6 +8,7 @@ import { TodoDetailComponent } from './todo-detail/todo-detail.component';
 import { RouterModule } from '@angular/router';
 import { TodoService } from './todo.service';
 import { TodoRoutingModule } from './todo-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [TodoListComponent, TodoDetailComponent],
@@ -17,6 +18,7 @@ import { TodoRoutingModule } from './todo-routing.module';
     MatListModule,
     MatIconModule,
     RouterModule,
+    HttpClientModule,
   ],
   providers: [TodoService],
 })
