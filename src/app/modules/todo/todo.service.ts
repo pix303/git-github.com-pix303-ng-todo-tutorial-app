@@ -62,12 +62,18 @@ export class TodoService {
     //     this.todos = data;
     //   });
 
-    return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos');
+    return this.http
+      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
+      .pipe(
+        // filtro solo item non completi mantenendo oggetto di tipo observable
+        map((items) => {
+          return items.filter((item) => !item.completed);
+        })
+      );
     // .subscribe((data) => {
     //   this.todos = data;
     // });
   }
-
   /**
    * retriveTodos effettua chiamata a server e valorizza lista esposta da service
    * @returns Observable lista todo
