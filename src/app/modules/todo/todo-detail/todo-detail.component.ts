@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Todo } from '../todo-model';
 import { TodoService } from '../todo.service';
 
@@ -11,11 +11,15 @@ import { TodoService } from '../todo.service';
 })
 export class TodoDetailComponent implements OnInit {
   // @Input() -- gestione con componenti istanziati nello stesso parent component
-  currentTodo?: Todo = {
+  currentTodo: Todo = {
     title: 'vuoto',
     id: 0,
     completed: false,
   };
+
+  currentDate = new Date();
+
+  @ViewChild('todoForm', { static: true }) todoForm: NgForm;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,5 +39,13 @@ export class TodoDetailComponent implements OnInit {
       (err) => console.log(err),
       () => console.log('è completo')
     );
+
+    this.todoForm.valueChanges?.subscribe((res) => console.log(res));
+    this.todoForm.statusChanges?.subscribe((res) => console.log(res));
+  }
+
+  onSubmit(): void {
+    this.currentTodo.title = this.todoForm.value.title;
+    this.currentTodo.completed = this.todoForm.value.done;
   }
 }

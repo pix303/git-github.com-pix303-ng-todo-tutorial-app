@@ -2,11 +2,58 @@
   Utilizzo con variabile del componente valorizzata in modo asincrono da
   subscribe
 </h2>
-<p>id: {{ currentTodo?.id }}</p>
-<p>title: {{ currentTodo?.title }}</p>
+<p style="color: blueviolet">
+  Utilizzati pipe per trasformare il testo e i numeri
+</p>
+<p>
+  <strong>
+    {{ currentDate | date: "dd/MM/yy" }}
+  </strong>
+</p>
+<pre>
+  <strong>
+    {{ currentTodo | json }}
+  </strong>
+</pre>
+
+<p>id: {{ currentTodo?.id | number: "1.2" }}</p>
+<p>title: {{ currentTodo?.title | slice: 0:15 | titlecase }}</p>
 <p>completed: {{ currentTodo?.completed }}</p>
 
 <h2>Utilizzo diretto dell'observable esposto da servizio</h2>
 <p>id: {{ (srv.currentTodo$ | async)?.id }}</p>
 <p>title: {{ (srv.currentTodo$ | async)?.title }}</p>
 <p>completed: {{ (srv.currentTodo$ | async)?.completed }}</p>
+
+<hr />
+<h2>Form inserimento dati</h2>
+
+<form #todoForm="ngForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <mat-label>Titolo</mat-label>
+      <input
+        matInput
+        placeholder="inserisci il titolo"
+        name="title"
+        required
+        [ngModel]="currentTodo.title"
+      />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-checkbox name="done" [ngModel]="currentTodo.completed"
+      >Fatto</mat-checkbox
+    >
+  </div>
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="!todoForm.valid"
+    >
+      Invia
+    </button>
+  </div>
+</form>
