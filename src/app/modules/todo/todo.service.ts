@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Todo } from './todo-model';
-import { concatAll, map, take, tap, toArray } from 'rxjs/operators';
+import { Todo, ServerTodo } from './todo-model';
+import { filter, map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
@@ -63,16 +63,20 @@ export class TodoService {
     //   });
 
     return this.http
-      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
+      .get<ServerTodo[]>('https://jsonplaceholder.typicode.com/todos')
       .pipe(
-        // filtro solo item non completi mantenendo oggetto di tipo observable
-        map((items) => {
-          return items.filter((item) => !item.completed);
-        })
+        map((items): Todo[] => {
+          return items.map((item): Todo => {
+            return {
+              id: item.id,
+              title: item.title,
+              done: item.completed,
+              userCode: item.userId,
+            };
+          });
+        }),
+        map((todos: Todo[]) => todos.filter((todo) => !todo.done))
       );
-    // .subscribe((data) => {
-    //   this.todos = data;
-    // });
   }
   /**
    * retriveTodos effettua chiamata a server e valorizza lista esposta da service

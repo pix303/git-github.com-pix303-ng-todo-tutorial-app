@@ -18,12 +18,12 @@
 
 <p>id: {{ currentTodo?.id | number: "1.2" }}</p>
 <p>title: {{ currentTodo?.title | slice: 0:15 | titlecase }}</p>
-<p>completed: {{ currentTodo?.completed }}</p>
+<p>completed: {{ currentTodo?.done }}</p>
 
 <h2>Utilizzo diretto dell'observable esposto da servizio</h2>
 <p>id: {{ (srv.currentTodo$ | async)?.id }}</p>
 <p>title: {{ (srv.currentTodo$ | async)?.title }}</p>
-<p>completed: {{ (srv.currentTodo$ | async)?.completed }}</p>
+<p>completed: {{ (srv.currentTodo$ | async)?.done }}</p>
 
 <hr />
 <h2>Form inserimento dati</h2>
@@ -42,9 +42,7 @@
     </mat-form-field>
   </div>
   <div>
-    <mat-checkbox name="done" [ngModel]="currentTodo.completed"
-      >Fatto</mat-checkbox
-    >
+    <mat-checkbox name="done" [ngModel]="currentTodo.done">Fatto</mat-checkbox>
   </div>
   <div>
     <button

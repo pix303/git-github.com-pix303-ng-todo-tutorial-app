@@ -14,7 +14,7 @@ export class TodoDetailComponent implements OnInit {
   currentTodo: Todo = {
     title: 'vuoto',
     id: 0,
-    completed: false,
+    done: false,
   };
 
   currentDate = new Date();
@@ -46,6 +46,6 @@ export class TodoDetailComponent implements OnInit {
 
   onSubmit(): void {
     this.currentTodo.title = this.todoForm.value.title;
-    this.currentTodo.completed = this.todoForm.value.done;
+    this.currentTodo.done = this.todoForm.value.done;
   }
 }

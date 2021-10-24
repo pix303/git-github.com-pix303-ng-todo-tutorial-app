@@ -6,8 +6,8 @@
     (click)="onItemSelected(todo.id)"
   >
     <h3>{{ i + 1 }} - {{ todo.title }}</h3>
-    <mat-icon matListIcon *ngIf="todo.completed">done</mat-icon>
-    <mat-icon matListIcon>{{ todo.completed ? "done" : "home" }}</mat-icon>
+    <mat-icon matListIcon *ngIf="todo.done">done</mat-icon>
+    <mat-icon matListIcon>{{ todo.done ? "done" : "home" }}</mat-icon>
   </a>
 </mat-nav-list>
 <!-- in caso di gestione link direttamente in tag anchor [routerLink]="['../', 'detail', todo.id]" -->

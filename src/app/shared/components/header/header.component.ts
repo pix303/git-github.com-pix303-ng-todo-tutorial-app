@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,11 +15,14 @@ export class HeaderComponent implements OnInit {
     'font-weight': 'bolder',
   };
 
-  constructor() {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {}
 
   onChangeColor(e: MouseEvent): void {
     this.mainColor = this.mainColor === 'purple' ? 'black' : 'purple';
+  }
+  onGoTodoView(e: MouseEvent): void {
+    this.router.navigate(['todo', 'list']);
   }
 }

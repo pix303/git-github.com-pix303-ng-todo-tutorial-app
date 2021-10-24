@@ -11,7 +11,18 @@
 export interface Todo {
   id: number;
   title: string;
+  done?: boolean;
+  userCode?: number;
+  user?: unknown;
+}
+export interface ServerTodo {
+  id: number;
+  title: string;
   completed?: boolean;
   userId?: number;
-  user?: unknown;
+}
+
+export interface TodoServer extends Todo {
+  completed?: boolean;
+  userId?: number;
 }
